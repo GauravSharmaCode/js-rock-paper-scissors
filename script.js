@@ -50,6 +50,7 @@ function getRoundResults(userOption) {
   }
 }
 
+// Select DOM elements for displaying scores and messages
 const playerScoreSpanElement = document.getElementById("player-score");
 const computerScoreSpanElement = document.getElementById("computer-score");
 const roundResultsMsg = document.getElementById("results-msg");
@@ -63,15 +64,21 @@ const resetGameBtn = document.getElementById("reset-game-btn");
  * @param {string} userOption - The user's chosen option.
  */
 function showResults(userOption) {
+  // Update the results message based on the round outcome
   roundResultsMsg.innerText = getRoundResults(userOption);
+
+  // Update the displayed scores in the DOM
   computerScoreSpanElement.innerText = computerScore;
   playerScoreSpanElement.innerText = playerScore;
 
+  // Check if either player or computer has won the game
   if (playerScore === 3 || computerScore === 3) {
+    // Display the winner message
     winnerMsgElement.innerText = `${
       playerScore === 3 ? "Player" : "Computer"
     } has won the game!`;
 
+    // Show the reset button and hide the options container
     resetGameBtn.style.display = "block";
     optionsContainer.style.display = "none";
   }
@@ -100,18 +107,18 @@ function resetGame() {
   optionsContainer.style.display = "block";
 
   // Clear the content of winnerMsgElement and roundResultsMsg
-  winnerMsgElement.innerText = "";
+  winnerMsgElement.innerText = ""; // Clear the winner message
   roundResultsMsg.innerText = ""; // Clear the results message
 }
 
-// Add event listeners to buttons
+// Add event listeners to buttons for user interactions
 document
   .getElementById("rock-btn")
-  .addEventListener("click", () => showResults("Rock"));
+  .addEventListener("click", () => showResults("Rock")); // Handle Rock button click
 document
   .getElementById("paper-btn")
-  .addEventListener("click", () => showResults("Paper"));
+  .addEventListener("click", () => showResults("Paper")); // Handle Paper button click
 document
   .getElementById("scissors-btn")
-  .addEventListener("click", () => showResults("Scissors"));
-resetGameBtn.addEventListener("click", resetGame);
+  .addEventListener("click", () => showResults("Scissors")); // Handle Scissors button click
+resetGameBtn.addEventListener("click", resetGame); // Handle Reset Game button click
